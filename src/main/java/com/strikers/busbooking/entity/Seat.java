@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,5 +27,6 @@ public class Seat {
 	
 	@JsonBackReference
 	@ManyToOne
+    @JoinColumn(name = "bus_id")
 	private Bus bus;
 }

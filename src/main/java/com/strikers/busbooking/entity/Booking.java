@@ -29,6 +29,6 @@ public class Booking {
 	private String bookingStatus;
 	
 	@JsonManagedReference
-	@OneToMany
+	@OneToMany(mappedBy = "booking")
 	private List<BookingDetail> bookingDetaillist;
 }
