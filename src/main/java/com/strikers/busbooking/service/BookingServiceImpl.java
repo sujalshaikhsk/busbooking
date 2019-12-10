@@ -13,4 +13,5 @@ public class BookingServiceImpl implements BookingService {
 	public List<Booking> searchBooking(String searchKey) {
 		return null;
 	}
+
 }
