@@ -22,7 +22,7 @@ public class Seat {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer seatId;
-	private Integer seatNumber;
+	private String seatNumber;
 	private String seatStatus;
 	
 	@JsonBackReference

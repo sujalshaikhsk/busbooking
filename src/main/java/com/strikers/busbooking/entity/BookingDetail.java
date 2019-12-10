@@ -37,7 +37,7 @@ public class BookingDetail {
 	private LocalDate bookingDate;
 	private String name;
 	private String gender;
-	private String mobileNumber;
+	private Long mobileNumber;
 	private String email;
 	private Integer age;
 	private String status;

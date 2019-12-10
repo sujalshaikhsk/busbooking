@@ -3,6 +3,11 @@ package com.strikers.busbooking.util;
 import java.time.LocalDate;
 import java.util.Random;
 
+/**
+ * 
+ * @author Sujal
+ *
+ */
 public class Utils {
 
 	private Utils() {}

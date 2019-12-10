@@ -1,5 +1,10 @@
 package com.strikers.busbooking.util;
 
+/**
+ * 
+ * @author Sujal
+ *
+ */
 public class StringConstant {
 
     private StringConstant(){ }
@@ -8,7 +13,7 @@ public class StringConstant {
 	public static final String DEACTIVE_STATUS = "DEACTIVE";
 	
 	public static final String BOOKED_STATUS = "BOOKED";
-	public static final String RELEASE_STATUS = "RELEASED";
+	public static final String RELEASE_STATUS = "RELEASE";
 	public static final String LOCKED_STATUS = "LOCKED";
 
 }
