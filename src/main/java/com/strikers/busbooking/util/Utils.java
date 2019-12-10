@@ -1,6 +1,7 @@
 package com.strikers.busbooking.util;
 
 import java.time.LocalDate;
+import java.util.Random;
 
 public class Utils {
 
@@ -14,6 +15,25 @@ public class Utils {
 	 */
 	public static LocalDate getCurrentDate() {
 		return LocalDate.now();
+	}
+
+
+	public static String getTicketNumber() {
+		// TODO Auto-generated method stub
+		String ticket="BB"+generateRandom(5);
+		return ticket;
+	}
+	
+	private static final Random random = new Random();
+
+	/**
+	 * generateRandom()
+	 *
+	 * @param size
+	 * @return
+	 */
+	public static int generateRandom(int size) {
+		return random.nextInt(size);
 	}
 
 }

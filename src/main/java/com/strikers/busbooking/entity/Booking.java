@@ -23,7 +23,7 @@ public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer bookingId;
-	private Integer ticketNumber;
+	private String ticketNumber;
 	private Integer numberOfSeats;
 	private Double totalPrice;
 	private String bookingStatus;

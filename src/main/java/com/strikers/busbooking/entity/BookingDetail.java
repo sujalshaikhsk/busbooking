@@ -27,9 +27,11 @@ public class BookingDetail {
 	private Integer bookingDetailId;
 	
 	@OneToOne
+	@JoinColumn(name="bus_id")
 	private Bus bus;
 	
 	@OneToOne
+	@JoinColumn(name="seat_id")
 	private Seat seat;
 	
 	private LocalDate bookingDate;

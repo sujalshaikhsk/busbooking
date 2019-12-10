@@ -9,11 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.strikers.busbooking.dto.BookingResponseDto;
+import com.strikers.busbooking.entity.BookingDetail;
 import com.strikers.busbooking.service.BookingService;
 
 /**
@@ -46,4 +50,14 @@ public class BookingController {
 		List<BookingResponseDto> bookingRequestDto = bookingService.searchBooking(searchKey);
 		return new ResponseEntity<>(bookingRequestDto, HttpStatus.OK);
 	}
+
+	@PostMapping("/{busId}")
+	public ResponseEntity<String> booking(@PathVariable("busId") Integer busId,
+			@RequestBody List<BookingDetail> bookingDetails) {
+
+		Boolean bookingStatus = bookingService.booking(busId, bookingDetails);
+
+		return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+	}
+
 }
