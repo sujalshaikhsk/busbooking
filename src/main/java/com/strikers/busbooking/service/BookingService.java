@@ -2,8 +2,18 @@ package com.strikers.busbooking.service;
 
 import java.util.List;
 
-import com.strikers.busbooking.entity.Booking;
+import com.strikers.busbooking.dto.BookingResponseDto;
 
+/**
+ * @author Vasavi
+ *
+ */
 public interface BookingService {
-	public List<Booking> searchBooking(String searchKey);
+	/**
+	 * @description -> this method is used for searching ticket based on
+	 *              mobileNumber and ticketNumber
+	 * @param searchKey
+	 * @return bookingResponseDto
+	 */
+	public List<BookingResponseDto> searchBooking(String searchKey);
 }
