@@ -30,6 +30,11 @@ public class BookingServiceImpl implements BookingService {
 	@Autowired
 	private BookingDetailRepository bookingDetailRepository;
 
+	@Override
+	public List<Booking> searchBooking(String searchKey) {
+		return null;
+	}
+	
 	/**
 	 * @description
 	 * @param busId
@@ -47,6 +52,7 @@ public class BookingServiceImpl implements BookingService {
 
 			bookingDetails.forEach(bookingDetails1 -> {
 				// totalPrice+=bus.getPrice();
+				//bookingDetails1.setBus(bus);
 				saveBookingDetail(bookingDetails1);
 			});
 
