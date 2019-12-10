@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.strikers.busbooking.entity.BookingDetail;
+import com.strikers.busbooking.dto.BookingRequestDto;
 import com.strikers.busbooking.service.BookingService;
 
 @RestController
@@ -26,11 +26,12 @@ public class BookingController {
 	private BookingService bookingService;
 	
 	@PostMapping("/{busId}")
-	public ResponseEntity<String> booking(@PathVariable("busId") Integer busId, @RequestBody List<BookingDetail> bookingDetails){
+	public ResponseEntity<String> booking(@PathVariable("busId") Integer busId, @RequestBody List<BookingRequestDto> BookingRequests){
 		
-		Boolean bookingStatus=bookingService.booking(busId, bookingDetails);
-		
-		return new ResponseEntity<String>(HttpStatus.ACCEPTED);	
+		Boolean bookingStatus=bookingService.booking(busId, BookingRequests);
+		if(bookingStatus)
+			new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);	
 	}
 	
 	@GetMapping("/{busId}")

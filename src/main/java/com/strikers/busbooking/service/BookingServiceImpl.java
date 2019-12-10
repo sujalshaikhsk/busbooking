@@ -1,5 +1,6 @@
 package com.strikers.busbooking.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,12 +9,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.strikers.busbooking.dto.BookingRequestDto;
 import com.strikers.busbooking.entity.Booking;
 import com.strikers.busbooking.entity.BookingDetail;
 import com.strikers.busbooking.entity.Bus;
 import com.strikers.busbooking.repository.BookingDetailRepository;
 import com.strikers.busbooking.repository.BookingRepository;
 import com.strikers.busbooking.repository.BusRepository;
+import com.strikers.busbooking.repository.SeatRepository;
 import com.strikers.busbooking.service.BookingService;
 import com.strikers.busbooking.util.StringConstant;
 import com.strikers.busbooking.util.Utils;
@@ -23,6 +26,9 @@ public class BookingServiceImpl implements BookingService {
 
 	@Autowired
 	private BusRepository busRepository;
+	
+	@Autowired
+	private SeatRepository seatRepository;
 
 	@Autowired
 	private BookingRepository bookingRepository;
@@ -38,22 +44,24 @@ public class BookingServiceImpl implements BookingService {
 	/**
 	 * @description
 	 * @param busId
+	 * @param bookingDetails
 	 * 
 	 */
 	@Override
-	public Boolean booking(Integer busId, List<BookingDetail> bookingDetails) {
+	public Boolean booking(Integer busId, List<BookingRequestDto> bookingRequestDtos) {
 		Booking booking = new Booking();
+		List<BookingDetail> bookingDetails=new ArrayList<BookingDetail>();
 		Double totalPrice = 0.0;
-		Bus bus = null;
 		Optional<Bus> optionalBus = busRepository.findById(busId);
 		if (optionalBus.isPresent()) {
 
-			bus = optionalBus.get();
-
-			bookingDetails.forEach(bookingDetails1 -> {
+			bookingRequestDtos.forEach(bookinRequest -> {
 				// totalPrice+=bus.getPrice();
-				//bookingDetails1.setBus(bus);
-				saveBookingDetail(bookingDetails1);
+				BookingDetail bookingDetail= new BookingDetail();
+				bookingDetail.setBus(optionalBus.get());
+				bookingDetail.setSeat(seatRepository.findById(bookinRequest.getSeatId()).get());
+				BookingDetail bookingDetail1=saveBookingDetail(bookingDetail);
+				bookingDetails.add(bookingDetail1);
 			});
 
 			booking.setBookingDetaillist(bookingDetails);
@@ -66,11 +74,21 @@ public class BookingServiceImpl implements BookingService {
 		return false;
 	}
 
+	/**
+	 * @description this method is used to save the booking detail
+	 * @param bookingDetail
+	 * @return
+	 */
 	@Transactional
 	private synchronized BookingDetail saveBookingDetail(BookingDetail bookingDetail) {
 		return bookingDetailRepository.save(bookingDetail);
 	}
 
+	/**
+	 * @description this method is used to save the booking
+	 * @param booking
+	 * @return
+	 */
 	@Transactional
 	private synchronized Booking saveBooking(Booking booking) {
 		return bookingRepository.save(booking);
